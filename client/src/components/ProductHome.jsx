@@ -1,5 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import axios from 'axios'
+import { Link } from 'react-router-dom';
 
 const ProductHome = (props) => {
     const [allProducts, setAllProducts] = useState([])
@@ -15,12 +16,11 @@ const ProductHome = (props) => {
     })
     return (
         <div>
+            <h2>All Products</h2>
             {
                 allProducts.map((product) => (
-                    <div>
-                        <p>Product Title: {product.title}</p>
-                        <p>Product Price: ${product.price}</p>
-                        <p>Product Description: {product.description}</p>
+                    <div className='m-3' key={product.id}>
+                        <Link to={'/'}>{product.title}</Link>
                     </div>
                     
                 ))
@@ -30,3 +30,4 @@ const ProductHome = (props) => {
 }
 
 export default ProductHome;
+
