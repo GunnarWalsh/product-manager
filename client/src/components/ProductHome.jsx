@@ -20,7 +20,7 @@ const ProductHome = (props) => {
             {
                 allProducts.map((product) => (
                     <div className='m-3' key={product.id}>
-                        <Link to={'/'}>{product.title}</Link>
+                        <Link to={`/products/${product._id}`}>{product.title}</Link>
                     </div>
                     
                 ))
@@ -30,4 +30,3 @@ const ProductHome = (props) => {
 }
 
 export default ProductHome;
-
