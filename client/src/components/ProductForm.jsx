@@ -31,7 +31,7 @@ const ProductForm = (props) => {
     return (
         <div className='d-flex justify-content-center'>
             <form className='row w-25 m-3' onSubmit={submitHandler} >
-                <h1>Project Manager</h1>
+                <h1>Product Manager</h1>
                 <label className='form-label'>Product Title:</label>
                 <input className='form-control' type="text" onChange={changeHandler} value={product.title} name='title' />
                 {

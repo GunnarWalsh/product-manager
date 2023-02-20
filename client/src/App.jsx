@@ -5,18 +5,27 @@ import Product from './components/Product';
 import Nav from './components/Nav'
 
 import {Routes, Route, Link} from 'react-router-dom'
-import { useState } from 'react';
+import { useState, useEffect} from 'react';
 import ProductEdit from './components/ProductEdit';
-
+import {io} from 'socket.io-client'
 
 function App() {
   const [allProducts, setAllProducts] = useState([])
+  const [socket] = useState(()=>io(':8000'))
+  useEffect(()=>{
+    socket.on('connection', ()=>{
+      console.log('connected to server')
+    })
+    return() => socket.disconnect(true);
+  },[])
+
+
   return (
     <div className="App">
       <Nav/>
       <Routes>
-        <Route path='/' element={<><ProductForm allProducts={allProducts} setAllProducts={setAllProducts} /><ProductHome /></> }/>
-        <Route path='/products/:id' element={<Product/>}/>
+        <Route path='/' element={<><ProductForm allProducts={allProducts} setAllProducts={setAllProducts}/><ProductHome  socket={socket}/></> }/>
+        <Route path='/products/:id' element={<Product socket={socket}/>}/>
         <Route path='/products/edit/:id' element={<ProductEdit/>}/>
       </Routes>
     </div>

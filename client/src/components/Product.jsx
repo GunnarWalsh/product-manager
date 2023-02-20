@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from 'react'
 import axios from 'axios'
 import {useParams , Link, useNavigate} from 'react-router-dom'
-const Product = (props) => {
+const Product = ({socket}) => {
     const {id} = useParams()
     const nav = useNavigate()
     const [SingleProduct, setSingleProduct] = useState({})
@@ -18,13 +18,16 @@ const Product = (props) => {
     }, [])
 
     const deleteHandler = () => {
-        axios.delete(`http://localhost:8000/api/products/${id}`)
-        .then((res) => {
-            nav('/')
-        })
-        .catch((err) => {
-            console.log(err);
-        })
+        socket.emit('deleteProduct', id)
+        nav('/')
+
+
+        // axios.delete(`http://localhost:8000/api/products/${id}`)
+        // .then((res) => {
+        // })
+        // .catch((err) => {
+        //     console.log(err);
+        // })
     }
 
     return (
