@@ -1,27 +1,39 @@
 import React, {useState, useEffect} from 'react'
 import axios from 'axios'
 import {useParams , Link, useNavigate} from 'react-router-dom'
+import {io} from 'socket.io-client'
 const Product = ({socket}) => {
     const {id} = useParams()
     const nav = useNavigate()
     const [SingleProduct, setSingleProduct] = useState({})
+
     
     useEffect(() => {
-        axios.get(`http://localhost:8000/api/products/${id}`)
-        .then((res) => {
-            console.log('*******', res.data)
-            setSingleProduct(res.data);
-        })
-        .catch((err) => {
-            console.log(err);
-        })
-    }, [])
+        socket.emit('showProduct' , id)
+        
+        socket.on('showProduct', () => {
+            axios.get(`http://localhost:8000/api/products/${id}`)
+            .then((res) => {
+                setSingleProduct(res.data)
+            })
+            .catch((err) => {
+                console.log(err)
+            })
+        });
+    },[])
+    //     axios.get(`http://localhost:8000/api/products/${id}`)
+    //     .then((res) => {
+    //         console.log('*******', res.data)
+    //         setSingleProduct(res.data);
+    //     })
+    //     .catch((err) => {
+    //         console.log(err);
+    //     })
+    // }, [])
 
     const deleteHandler = () => {
         socket.emit('deleteProduct', id)
         nav('/')
-
-
         // axios.delete(`http://localhost:8000/api/products/${id}`)
         // .then((res) => {
         // })

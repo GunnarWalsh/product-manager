@@ -16,7 +16,7 @@ const ProductHome = ({socket}) => {
             .catch((err) => {
                 console.log(err)
             })
-    },)
+    })
 
 
     socket.on('productDeleted', (deletedId) => {

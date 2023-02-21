@@ -11,13 +11,16 @@ import {io} from 'socket.io-client'
 
 function App() {
   const [allProducts, setAllProducts] = useState([])
-  const [socket] = useState(()=>io(':8000'))
+  const [socket] = useState(()=>io(':8000',{
+    withCredentials:true
+}))
   useEffect(()=>{
     socket.on('connection', ()=>{
       console.log('connected to server')
     })
-    return() => socket.disconnect(true);
+    return() => socket.off('connection');
   },[])
+
 
 
   return (

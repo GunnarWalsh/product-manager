@@ -18,7 +18,7 @@ const server = app.listen(port, () => console.log(`Listening on port: ${port}`) 
 
 const io = socket(server, {
     cors:{
-        origin:"*",
+        origin:"http://localhost:3000",
         methods:['GET','POST'],
         allowedHeaders: ['*'],
         credentials: true,
@@ -27,8 +27,9 @@ const io = socket(server, {
 
 io.on("connection", socket => {
     console.log('new user:'+ socket.id)
+
     socket.on('deleteProduct', (payload) => {
-        console.log('payload:' , payload)
+        console.log('deleteProduct:' , payload)
         Product.deleteOne({_id: payload})
         .then((res) => {
             io.emit('productDeleted', payload)
@@ -37,7 +38,18 @@ io.on("connection", socket => {
             console.log(err)
         })
     })
-    socket.on("disconnect", socket => {
-        console.log('disconnected user with id:' + socket.id)
+
+    socket.on('showProduct', (payload) => {
+        console.log('showProduct:' , payload)
+        Product.findOne({_id: payload})
+        .then((res) => {
+            io.emit('showProduct', payload)
+        })
+        .catch((err) => {
+            console.log(err)
+        })
+    })
+    socket.on("disconnect", (reason) => {
+        console.log('disconnected user with id:' , socket.id)
     })
 })
