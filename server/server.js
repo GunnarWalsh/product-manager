@@ -34,7 +34,7 @@ io.on("connection", socket => {
         console.log('deleteProduct:' , payload)
         Product.deleteOne({_id: payload})
         .then((res) => {
-            io.emit('productDeleted', payload)
+            io.emit('deleteProduct', payload)
         })
         .catch((err) => {
             console.log(err)
@@ -46,7 +46,7 @@ io.on("connection", socket => {
         Product.findOne({_id: payload})
         .then((res) => {
             io.emit('showProduct', payload)
-            // console.log(res)
+            console.log(res)
         })
         .catch((err) => {
             console.log(err)
