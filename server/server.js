@@ -3,6 +3,8 @@ const app = express();
 const port = 8000;
 const cors = require('cors')
 const socket = require('socket.io')
+
+
 const Product = require('./models/product')
 require("./config/mongoose.config");
 
@@ -20,7 +22,7 @@ const io = socket(server, {
     cors:{
         origin:"http://localhost:3000",
         methods:['GET','POST'],
-        allowedHeaders: ['*'],
+        allowedHeaders: '*',
         credentials: true,
     }
 })

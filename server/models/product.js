@@ -11,6 +11,7 @@ const ProductSchema = new mongoose.Schema({
         type: Number,
         required:[true, 'Must complete field'],
         min:[0, 'Product cost cannot be negative'],
+        max:[3, 'Product cost cannot be more than 3']
         
     },
     description:{

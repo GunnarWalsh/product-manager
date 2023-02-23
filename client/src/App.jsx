@@ -27,7 +27,7 @@ function App() {
     <div className="App">
       <Nav/>
       <Routes>
-        <Route path='/' element={<><ProductForm allProducts={allProducts} setAllProducts={setAllProducts}/><ProductHome  socket={socket}/></> }/>
+        <Route path='/' element={<><ProductForm allProducts={allProducts} setAllProducts={setAllProducts} socket={socket}/><ProductHome  socket={socket}/></> }/>
         <Route path='/products/:id' element={<Product socket={socket}/>}/>
         <Route path='/products/edit/:id' element={<ProductEdit/>}/>
       </Routes>
