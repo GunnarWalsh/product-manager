@@ -9,27 +9,27 @@ const Product = ({socket}) => {
 
     
     useEffect(() => {
-        socket.emit('showProduct' , id)
+        axios.get(`http://localhost:8000/api/products/${id}`)
+        .then((res) => {
+            console.log('*******', res.data)
+            setSingleProduct(res.data);
+        })
+        .catch((err) => {
+            console.log(err);
+        })
+    }, [])
+    //     socket.emit('showProduct' , id)
         
-        socket.on('showProduct', () => {
-            axios.get(`http://localhost:8000/api/products/${id}`)
-            .then((res) => {
-                setSingleProduct(res.data)
-            })
-            .catch((err) => {
-                console.log(err)
-            })
-        });
-    },[])
-    //     axios.get(`http://localhost:8000/api/products/${id}`)
-    //     .then((res) => {
-    //         console.log('*******', res.data)
-    //         setSingleProduct(res.data);
-    //     })
-    //     .catch((err) => {
-    //         console.log(err);
-    //     })
-    // }, [])
+    //     socket.on('showProduct', () => {
+    //         axios.get(`http://localhost:8000/api/products/${id}`)
+    //         .then((res) => {
+    //             setSingleProduct(res.data)
+    //         })
+    //         .catch((err) => {
+    //             console.log(err)
+    //         })
+    //     });
+    // },[])
 
     const deleteHandler = () => {
         socket.emit('deleteProduct', id)

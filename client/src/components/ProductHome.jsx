@@ -8,6 +8,7 @@ const ProductHome = ({socket}) => {
 
 
     useEffect(() => {
+
         axios.get('http://localhost:8000/api/products')
             .then((allProducts) => {
                 setAllProducts(allProducts.data)
@@ -16,7 +17,7 @@ const ProductHome = ({socket}) => {
             .catch((err) => {
                 console.log(err)
             })
-    })
+    }, [])
 
 
     socket.on('productDeleted', (deletedId) => {

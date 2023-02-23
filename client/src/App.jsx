@@ -11,9 +11,7 @@ import {io} from 'socket.io-client'
 
 function App() {
   const [allProducts, setAllProducts] = useState([])
-  const [socket] = useState(()=>io(':8000',{
-    withCredentials:true
-}))
+  const [socket] = useState(() => io(':8000'));
   useEffect(()=>{
     socket.on('connection', ()=>{
       console.log('connected to server')
@@ -28,7 +26,7 @@ function App() {
       <Nav/>
       <Routes>
         <Route path='/' element={<><ProductForm allProducts={allProducts} setAllProducts={setAllProducts} socket={socket}/><ProductHome  socket={socket}/></> }/>
-        <Route path='/products/:id' element={<Product socket={socket}/>}/>
+        <Route path='/products/:id' element={<Product socket={socket} allProducts={allProducts} setAllProducts={setAllProducts}/>}/>
         <Route path='/products/edit/:id' element={<ProductEdit/>}/>
       </Routes>
     </div>

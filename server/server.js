@@ -20,9 +20,9 @@ const server = app.listen(port, () => console.log(`Listening on port: ${port}`) 
 
 const io = socket(server, {
     cors:{
-        origin:"*",
+        origin:"http://localhost:3000",
         methods:['GET','POST'],
-        allowedHeaders: '*',
+        allowedHeaders: ['*'],
         credentials: true,
     }
 })
@@ -46,6 +46,7 @@ io.on("connection", socket => {
         Product.findOne({_id: payload})
         .then((res) => {
             io.emit('showProduct', payload)
+            // console.log(res)
         })
         .catch((err) => {
             console.log(err)
