@@ -20,7 +20,7 @@ const ProductHome = ({socket}) => {
     }, [])
 
 
-    socket.on('productDeleted', (deletedId) => {
+    socket.on('deleteProduct', (deletedId) => {
         setAllProducts(allProducts.filter((product) => product._id !== deletedId))
     });
 
