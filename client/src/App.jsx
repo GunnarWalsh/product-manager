@@ -26,7 +26,7 @@ function App() {
       <Nav/>
       <Routes>
         <Route path='/' element={<><ProductForm allProducts={allProducts} setAllProducts={setAllProducts} socket={socket}/><ProductHome  socket={socket}/></> }/>
-        <Route path='/products/:id' element={<Product socket={socket} allProducts={allProducts} setAllProducts={setAllProducts}/>}/>
+        <Route path='/products/:id' element={<Product socket={socket}/>}/>
         <Route path='/products/edit/:id' element={<ProductEdit/>}/>
       </Routes>
     </div>

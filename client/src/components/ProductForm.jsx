@@ -26,6 +26,7 @@ const ProductForm = (props) => {
                 console.log(err)
                 console.log(err.response.data.error.errors);
                 setErrors(err.response.data.error.errors);
+
             })
     }
     return (
@@ -46,13 +47,13 @@ const ProductForm = (props) => {
                         </div>
                         <input className="form-control" type="number" onChange={changeHandler} value={product.price} name='price' />
                         {
-                            errors.price?
+                            errors.price? 
                             <p className='text-danger'>{errors.price.message}</p>:
                             null
                         }
                     </div>
-                <label>Product Description:</label>
-                <input type="text" onChange={changeHandler} value={product.description} name='description' className='mb-2' />
+                <label className='form-label'>Product Description:</label>
+                <input type="text" onChange={changeHandler} value={product.description} name='description' className='mb-2 form-control' />
                 {
                     errors.description?
                     <p className='text-danger'>{errors.description.message}</p>:

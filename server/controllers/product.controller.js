@@ -4,6 +4,7 @@ const Product = require('../models/product')
 module.exports = {
 //Create
     createProduct: (req,res) => {
+
         Product.create(req.body)
             .then((newProduct) => {
                 res.json(newProduct)
@@ -12,6 +13,7 @@ module.exports = {
                 res.status(500).json({message: 'Something went wrong', error: err})
             })
     },
+    
 //Read
     allProducts: (req,res) => {
         Product.find()
